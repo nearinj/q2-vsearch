@@ -33,6 +33,7 @@ _jp_defaults = {
     'qminout': 0,
     'qmax': 41,
     'qmaxout': 41,
+    'threads': 1,
 }
 
 
@@ -50,6 +51,7 @@ def join_pairs(demultiplexed_seqs: SingleLanePerSamplePairedEndFastqDirFmt,
                qminout: int = _jp_defaults['qminout'],
                qmax: int = _jp_defaults['qmax'],
                qmaxout: int = _jp_defaults['qmaxout'],
+               threads: int = _jp_defaults['threads'],
                ) -> SingleLanePerSampleSingleEndFastqDirFmt:
     _, result = _join_pairs_w_command_output(
         demultiplexed_seqs, truncqual, minlen, maxns, allowmergestagger,
@@ -73,6 +75,7 @@ def _join_pairs_w_command_output(
         qminout: int = _jp_defaults['qminout'],
         qmax: int = _jp_defaults['qmax'],
         qmaxout: int = _jp_defaults['qmaxout'],
+        threads: int = _jp_defaults['threads'],
         ) -> (List[str], SingleLanePerSampleSingleEndFastqDirFmt):
     # this function exists only to simplify unit testing
 
@@ -125,6 +128,7 @@ def _join_pairs_w_command_output(
                '--fastq_qminout', str(qminout),
                '--fastq_qmax', str(qmax),
                '--fastq_qmaxout', str(qmaxout),
+               '--threads', str(threads),
                ]
         if truncqual is not None:
             cmd += ['--fastq_truncqual', str(truncqual)]
