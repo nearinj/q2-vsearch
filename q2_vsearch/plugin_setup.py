@@ -285,6 +285,7 @@ plugin.methods.register_function(
             40, 41, inclusive_start=True, inclusive_end=True),
         'qmaxout': qiime2.plugin.Int % qiime2.plugin.Range(
             40, 41, inclusive_start=True, inclusive_end=True),
+        'threads': qiime2.plugin.Int % qiime2.plugin.Range(0, None),
     },
     outputs=[
         ('joined_sequences', SampleData[JoinedSequencesWithQuality])
@@ -313,6 +314,7 @@ plugin.methods.register_function(
         'qminout': ('The minimum allowed quality score to use in output.'),
         'qmax': ('The maximum allowed quality score in the input.'),
         'qmaxout': ('The maximum allowed quality score to use in output.'),
+        'threads': ('The number of threads to run this command on')
     },
     output_descriptions={
         'joined_sequences': ('The joined sequences.'),
